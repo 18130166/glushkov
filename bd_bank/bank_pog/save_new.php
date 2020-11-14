@@ -1,17 +1,16 @@
 <?php
 require_once 'connect.php';
 $link = mysqli_connect($host, $user, $password) or die ("Невозможно подключиться к серверу");
-if($_GET['name']&&$_GET['inn']&&$_GET['country']&&$_GET['class']&&$_GET['assets']){
+if($_GET['name']&&$_GET['per']&&$_GET['id_bank']){
     $name     = htmlentities(mysqli_real_escape_string($link, $_GET['name']));
-    $inn      = htmlentities(mysqli_real_escape_string($link, $_GET['inn']));
-    $country  = htmlentities(mysqli_real_escape_string($link, $_GET['country']));
-    $class    = htmlentities(mysqli_real_escape_string($link, $_GET['class']));
-    $assets   = htmlentities(mysqli_real_escape_string($link, $_GET['assets']));
+    $per      = htmlentities(mysqli_real_escape_string($link, $_GET['per']));
+    $id_bank  = htmlentities(mysqli_real_escape_string($link, $_GET['id_bank']));
+
     mysqli_select_db($link, "f0470376_glushkov") or die("Данной таблицы не существует.");
-    $sql_add = "INSERT INTO f0470376_glushkov.bank
-    (id_bank, bank_name, INN, bank_country, bank_class, bank_assets)
+    $sql_add = "INSERT INTO f0470376_glushkov.bank_prog
+    (prog_id, prog_name, prog_per, id_bank)
     VALUES
-    (NULL, '$name', '$inn', '$country', '$class', '$assets')";
+    (NULL, '$name', '$per', '$id_bank')";
     mysqli_query($link, $sql_add) or die("Невозможно выполнить запрос!");
     
     if(mysqli_affected_rows($link)>0){
