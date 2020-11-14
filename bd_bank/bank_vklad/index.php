@@ -3,20 +3,21 @@
 <body>
 <table border="1">
 <tr>
-<th> Ид </th> <th> Навание </th> <th> % годовых </th> <th> id банка </th> 
+<th> Ид </th> <th> Дата создания вклада </th> <th> id программы депозита </th> <th> стартовая
+сумма вклада </th> 
 <th> Изменить </th> <th> Удалить </th> </tr>
 <?php
 $link = mysqli_connect($host, $user, $password) or die ("Невозможно подключиться к серверу"); 
-$result = mysqli_query($link, "SELECT * FROM f0470376_glushkov.bank_prog"); 
+$result = mysqli_query($link, "SELECT *, DATE_FORMAT(vklad_date, '%d.%m.%Y') as date_rus FROM f0470376_glushkov.bank_vklad"); 
 mysqli_select_db($link, "f0470376_glushkov") or die("Нет такой таблицы!");
 while ($row = mysqli_fetch_array($result)){
     echo "<tr>";
-    echo "<td>" . $row['prog_id']   . "</td>";
-    echo "<td>" . $row['prog_name'] . "</td>";
-    echo "<td>" . $row['prog_per']  . "</td>";
-    echo "<td>" . $row['id_bank']   . "</td>";
-    echo "<td><a href='edit.php?prog_id="   . $row['prog_id']. "'>Изменить</a></td>";
-    echo "<td><a href='delete.php?prog_id=" . $row['prog_id']. "'>Удалить</a></td>";
+    echo "<td>" . $row['vklad_id']   . "</td>";
+    echo "<td>" . $row['date_rus'] . "</td>";
+    echo "<td>" . $row['prog_id']  . "</td>";
+    echo "<td>" . $row['vklad_sum']   . "</td>";
+    echo "<td><a href='edit.php?vklad_id="   . $row['vklad_id']. "'>Изменить</a></td>";
+    echo "<td><a href='delete.php?vklad_id=" . $row['vklad_id']. "'>Удалить</a></td>";
     echo "</tr>";
 } 
 

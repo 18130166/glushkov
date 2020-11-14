@@ -4,15 +4,15 @@
 
 <H2>Внесите данные:</H2>
 <form action='save_new.php' metod='get'> <p style='margin-left: 50px;'> <table style='font-size: 20'>
-<tr><td>Название:       <td><input name='name'      maxlength='20' type='text'></tr>
-<tr><td>% годовых:      <td><input name='per'       maxlength='10' type='text'></tr>
+<tr><td> дата создания вклада:       <td><input name='date'      maxlength='20' type='date'></tr>
+<tr><td> стартовая сумма вклада:     <td><input name='sum'       maxlength='10' type='text'></tr>
 <?
 
 $link = mysqli_connect($host, $user, $password, $database) or die ("Невозможно подключиться к серверу");
-$query_1 = "SELECT * FROM f0470376_glushkov.bank";
+$query_1 = "SELECT * FROM f0470376_glushkov.bank_prog";
 $rows_1 = mysqli_query($link, $query_1) or die ("Ошибка в запросе");
-   echo("<tr><td>id банка:<td><select id='id_bank' name='id_bank'>");
-    echo("<option disabled>Выберите имя</option>");
+   echo("<tr><td>id программы депозита:<td><select id='prog_id' name='prog_id'>");
+    echo("<option disabled>Выберите</option>");
      while($row = mysqli_fetch_array($rows_1)){
         echo("<option value='$row[0]'> $row[0] - $row[1]</option>");
      }
